@@ -1,0 +1,267 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <style>
+            body{
+                background-image: url(https://i.pinimg.com/originals/32/7e/98/327e983bf836dbfcf8ca12241fa1f0a6.jpg);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                color: black;
+            }
+            .background-div{
+                background-color: white;
+                padding: 30px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    
+<body>
+    <h1 style="color: white;">Hackathon Deal - Equipe 4</h1>
+    <div class="background-div">
+    <div>
+    <label>Nome</label>
+    <input type="text" id="pesquisa-nome" />
+    <button onclick="pesquisaNome()">Pesquisar</button>
+    <br>
+    <br>
+    <label>Categoria</label>
+    <input type="text" id="pesquisa-categoria" />
+    <button onclick="pesquisaCategoria()">Pesquisar</button>
+    <br>
+    <br>
+    <label>Código</label>
+    <input type="text" id="pesquisa-codigo" />
+    <button onclick="pesquisaCodigo()">Pesquisar</button>
+    <br>
+    <br>
+    <label>Código  </label>
+    Preço Min: 
+    <input type="text" id="pesquisa-min" />
+    <span>   </span>
+    Preço Max: 
+    <input type="text" id="pesquisa-max" />
+    <button onclick="pesquisaPreco()">Pesquisar</button>
+</div>
+    <br>
+    <table id="datatables" class="display">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th>Código</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+    </table>
+</div>
+<!--<script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
+<script>
+
+$.ajax({
+    url: 'http://localhost:8080/livro/',
+    success: (data => {
+        console.log(data);
+        data.forEach(element => {
+            console.log(element);
+            $('#table-body').append(
+                `<tr>
+                <td>${element.id}</td>
+                <td>${element.nome}</td>
+                <td>${element.preco}</td>
+                <td>${element.categoria}</td>
+                <td>${element.codigo}</td>
+                </tr>`
+            );
+        });
+    })
+});
+
+function pesquisaNome(){
+    $('#table-body').html('');
+    if($('#pesquisa-nome').val() == ''){
+        $.ajax({
+        url: 'http://localhost:8080/livro/',
+        success: (data => {
+            console.log(data);
+            data.forEach(element => {
+                console.log(element);
+                $('#table-body').append(
+                    `<tr>
+                    <td>${element.id}</td>
+                    <td>${element.nome}</td>
+                    <td>${element.preco}</td>
+                    <td>${element.categoria}</td>
+                    <td>${element.codigo}</td>
+                    </tr>`
+                );
+            });
+        })
+        })
+    }
+    $.ajax({
+    url: `http://localhost:8080/livro/nome/${$('#pesquisa-nome').val()}`,
+    success: (data => {
+        console.log(data);
+        data.forEach(element => {
+            console.log(element);
+            $('#table-body').append(
+                `<tr>
+                <td>${element.id}</td>
+                <td>${element.nome}</td>
+                <td>${element.preco}</td>
+                <td>${element.categoria}</td>
+                <td>${element.codigo}</td>
+                </tr>`
+            );
+        });
+    })
+})
+}
+
+function pesquisaCategoria(){
+    $('#table-body').html('');
+    if($('#pesquisa-categoria').val() == ''){
+        $.ajax({
+        url: 'http://localhost:8080/livro/',
+        success: (data => {
+            console.log(data);
+            data.forEach(element => {
+                console.log(element);
+                $('#table-body').append(
+                    `<tr>
+                    <td>${element.id}</td>
+                    <td>${element.nome}</td>
+                    <td>${element.preco}</td>
+                    <td>${element.categoria}</td>
+                    <td>${element.codigo}</td>
+                    </tr>`
+                );
+            });
+        })
+        })
+    }
+    $.ajax({
+    url: `http://localhost:8080/livro/categoria/${$('#pesquisa-categoria').val()}`,
+    success: (data => {
+        console.log(data);
+        data.forEach(element => {
+            console.log(element);
+            $('#table-body').append(
+                `<tr>
+                <td>${element.id}</td>
+                <td>${element.nome}</td>
+                <td>${element.preco}</td>
+                <td>${element.categoria}</td>
+                <td>${element.codigo}</td>
+                </tr>`
+            );
+        });
+    })
+})
+}
+
+function pesquisaCodigo(){
+    $('#table-body').html('');
+    if($('#pesquisa-codigo').val() == ''){
+        $.ajax({
+        url: 'http://localhost:8080/livro/',
+        success: (data => {
+            console.log(data);
+            data.forEach(element => {
+                console.log(element);
+                $('#table-body').append(
+                    `<tr>
+                    <td>${element.id}</td>
+                    <td>${element.nome}</td>
+                    <td>${element.preco}</td>
+                    <td>${element.categoria}</td>
+                    <td>${element.codigo}</td>
+                    </tr>`
+                );
+            });
+        })
+        })
+    }
+    $.ajax({
+    url: `http://localhost:8080/livro/codigo/${$('#pesquisa-codigo').val()}`,
+    success: (data => {
+        console.log(data);
+        data.forEach(element => {
+            console.log(element);
+            $('#table-body').append(
+                `<tr>
+                <td>${element.id}</td>
+                <td>${element.nome}</td>
+                <td>${element.preco}</td>
+                <td>${element.categoria}</td>
+                <td>${element.codigo}</td>
+                </tr>`
+            );
+        });
+    })
+})
+}
+
+function pesquisaPreco(){
+    $('#table-body').html('');
+    if($('#pesquisa-min').val() == '' || $('#pesquisa-min').val() == ''){
+        $.ajax({
+        url: 'http://localhost:8080/livro/',
+        success: (data => {
+            console.log(data);
+            data.forEach(element => {
+                console.log(element);
+                $('#table-body').append(
+                    `<tr>
+                    <td>${element.id}</td>
+                    <td>${element.nome}</td>
+                    <td>${element.preco}</td>
+                    <td>${element.categoria}</td>
+                    <td>${element.codigo}</td>
+                    </tr>`
+                );
+            });
+        })
+        })
+    }
+    $.ajax({
+    url: `http://localhost:8080/livro/preco/${$('#pesquisa-min').val()}/${$('#pesquisa-max').val()}`,
+    success: (data => {
+        console.log(data);
+        data.forEach(element => {
+            console.log(element);
+            $('#table-body').append(
+                `<tr>
+                <td>${element.id}</td>
+                <td>${element.nome}</td>
+                <td>${element.preco}</td>
+                <td>${element.categoria}</td>
+                <td>${element.codigo}</td>
+                </tr>`
+            );
+        });
+    })
+})
+}
+
+</script>
+
+</body>
+</html>
