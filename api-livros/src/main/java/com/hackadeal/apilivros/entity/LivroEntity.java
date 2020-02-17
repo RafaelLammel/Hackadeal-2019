@@ -2,8 +2,9 @@ package com.hackadeal.apilivros.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "livro")
@@ -15,7 +16,9 @@ public class LivroEntity {
     private float preco;
     private int paginas;
     private int codigo;
-    private int id_categoria;
+    @ManyToOne
+    @JoinColumn(name="id_categoria")
+    private CategoriaEntity categoria;
 
     public int getId() {
         return id;
@@ -57,23 +60,12 @@ public class LivroEntity {
         this.codigo = codigo;
     }
 
-    public int getId_categoria() {
-        return id_categoria;
+    public CategoriaEntity getCategoria() {
+        return categoria;
     }
 
-    public void setId_categoria(int id_categoria) {
-        this.id_categoria = id_categoria;
+    public void setCategoria(CategoriaEntity categoria) {
+        this.categoria = categoria;
     }
-
-    @Override
-    public String toString() {
-        return "LivroEntity{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", preco=" + preco +
-                ", paginas=" + paginas +
-                ", codigo=" + codigo +
-                ", id_categoria=" + id_categoria +
-                '}';
-    }
+    
 }
